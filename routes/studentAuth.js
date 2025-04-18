@@ -52,7 +52,22 @@ router.post('/login', async (req, res) => {
         if (!isMatch) throw new Error("Incorrect password");
 
         const token = await student.generateToken();
-        res.cookie('token', token, { httpOnly: true }).send("Login successful");
+        res.json({
+            status: true,
+            message: "Login successful",
+            token: token,
+            data: {
+              name: student.name,
+              regno: student.regno,
+              department: student.department,
+              hostelName: student.hostelName,
+              roomNo: student.roomNo,
+              uniqid: student.uniqid,
+              studentPhoneNo: student.studentPhoneNo,
+              parentName: student.parentName,
+              parentPhoneNo: student.parentPhoneNo,
+            }
+          });
     } catch (err) {
         res.status(400).send("Login error: " + err.message);
     }
