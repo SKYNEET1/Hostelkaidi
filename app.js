@@ -12,7 +12,6 @@ console.log(dotenv.config())
 const app = express();
 app.use(cors({
     origin: 'https://hostel-kaidi.vercel.app/', // or your frontend domain
-    credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
