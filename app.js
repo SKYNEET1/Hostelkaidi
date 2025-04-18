@@ -3,11 +3,14 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const studentAuthRouter = require('./routes/studentAuth');
 const dotenv = require('dotenv')
+const location = require('./routes/location')
+const cors = require('cors')
 dotenv.config();
 console.log(dotenv.config())
 
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 console.log(process.env.MONGO_URL);
@@ -19,6 +22,7 @@ mongoose.connect(mongoURI,{
     .catch((err) => console.log("DB Error:", err));
 
 app.use('/', studentAuthRouter);
+app.use('/', location);
 
 const PORT = process.env.PORT || 3000;
 
