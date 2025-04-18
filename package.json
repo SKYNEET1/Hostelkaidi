@@ -18,7 +18,7 @@
   "scripts": {
     "build": "echo 'No build step required'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node midleware/app.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
