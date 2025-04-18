@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const studentSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true},
+    name: { type: String, required: true },
     regno: { type: String, required: true, unique: true },
     department: { type: String, required: true },
     parentName: { type: String, required: true },
@@ -13,6 +13,11 @@ const studentSchema = new mongoose.Schema(
     hostelName: { type: String, required: true },
     roomNo: { type: String, required: true },
     uniqid: { type: String, required: true, unique: true },
+    Usertype: {
+      type: String,
+      required: true,
+      enum: ["student", "security"], // 🚨 Restrict to these two values
+    },
     password: { type: String, required: true },
   },
   { timestamps: true }
