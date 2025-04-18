@@ -6,7 +6,7 @@ const Student = require('../model/Schema'); // adjust path if needed
 // POST /location-log
 router.post('/qr-display', async (req, res) => {
   try {
-    const { uniqid, qrCodeId, place, purpose, exitTime, entryTime, exitDate,studentId } = req.body;
+    const { uniqid, qrCodeId, place, purpose, exitTime, isReturned, exitDate } = req.body;
 
     // Find student by uniqid
     const student = await Student.findOne({ uniqid });
@@ -27,7 +27,7 @@ router.post('/qr-display', async (req, res) => {
       place,
       purpose,
       exitTime,
-      entryTime,
+      isReturned,
       exitDate,
     });
 
