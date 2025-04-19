@@ -93,18 +93,24 @@ router.post('/login', async (req, res) => {
 
 // ✅ PATCH ROUTE — Set isReturned to true
 // ✅ PUT ROUTE — Update isReturned to true and return full student data
-router.put('/update-return', async (req, res) => {
+// ✅ PUT ROUTE — Update return status using uniqid from URL
+router.put('/:uniqid/update-return', async (req, res) => {
     try {
-        const { uniqid } = req.body;
+        const { uniqid } = req.params;
+        const { isReturned, returnTime, isLate } = req.body;
 
         if (!uniqid) {
-            return res.status(400).json({ status: false, message: "uniqid is required" });
+            return res.status(400).json({ status: false, message: "uniqid is required in URL" });
         }
 
         const updatedStudent = await Student.findOneAndUpdate(
             { uniqid },
-            { isReturned: true },
-            { new: true } // returns updated document
+            {
+                isReturned,
+                returnTime,
+                isLate
+            },
+            { new: true } // returns the updated document
         );
 
         if (!updatedStudent) {
@@ -116,6 +122,7 @@ router.put('/update-return', async (req, res) => {
             message: "Return status updated successfully",
             data: updatedStudent
         });
+
     } catch (err) {
         res.status(500).json({ status: false, message: "Update error: " + err.message });
     }
