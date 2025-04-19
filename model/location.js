@@ -11,7 +11,7 @@ const locationSchema = new mongoose.Schema(
     place: { type: String, required: true },
     purpose: { type: String, required: true },
     exitTime: { type: String, required: true },
-    isReturned: { type: Boolean, required: true },
+    isReturned: { type: Boolean, default: false },
     exitDate: { type: String, required: true }
   },
   { timestamps: true }

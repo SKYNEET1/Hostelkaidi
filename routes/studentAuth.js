@@ -16,7 +16,6 @@ router.post('/signup', async (req, res) => {
             studentPhoneNo, hostelName, roomNo, password, Usertype
         } = req.body;
 
-        // ✅ Correct usertype validation: Only "student" or "security" allowed
         if (!["student", "security"].includes(Usertype)) {
             return res.status(400).json({
                 status: false,
@@ -64,7 +63,6 @@ router.post('/login', async (req, res) => {
         const isMatch = await student.comparePassword(password);
         if (!isMatch) throw new Error("Incorrect password");
 
-        // ✅ Match Usertype
         if (student.Usertype !== Usertype) {
             throw new Error("Usertype mismatch");
         }
@@ -90,6 +88,36 @@ router.post('/login', async (req, res) => {
         });
     } catch (err) {
         res.status(400).json({ status: false, message: "Login error: " + err.message });
+    }
+});
+
+// ✅ PATCH ROUTE — Set isReturned to true
+// ✅ PUT ROUTE — Update isReturned to true and return full student data
+router.put('/update-return', async (req, res) => {
+    try {
+        const { uniqid } = req.body;
+
+        if (!uniqid) {
+            return res.status(400).json({ status: false, message: "uniqid is required" });
+        }
+
+        const updatedStudent = await Student.findOneAndUpdate(
+            { uniqid },
+            { isReturned: true },
+            { new: true } // returns updated document
+        );
+
+        if (!updatedStudent) {
+            return res.status(404).json({ status: false, message: "Student not found" });
+        }
+
+        res.json({
+            status: true,
+            message: "Return status updated successfully",
+            data: updatedStudent
+        });
+    } catch (err) {
+        res.status(500).json({ status: false, message: "Update error: " + err.message });
     }
 });
 
