@@ -7,6 +7,7 @@ const generateUniqueID = () => {
     return Math.floor(10000 + Math.random() * 90000).toString(); // 5-digit random number
 };
 
+// ✅ SIGNUP ROUTE
 router.post('/signup', async (req, res) => {
     try {
         const {
@@ -15,9 +16,12 @@ router.post('/signup', async (req, res) => {
             studentPhoneNo, hostelName, roomNo, password, Usertype
         } = req.body;
 
-        // ✅ Validate Usertype manually before saving
-        if (!["student", "watchman"].includes(Usertype)) {
-            return res.status(400).json({ status: false, message: "Usertype must be either 'student' or 'watchman'" });
+        // ✅ Correct usertype validation: Only "student" or "security" allowed
+        if (!["student", "security"].includes(Usertype)) {
+            return res.status(400).json({
+                status: false,
+                message: "Usertype must be either 'student' or 'security'"
+            });
         }
 
         const hash = await bcrypt.hash(password, 10);
@@ -38,6 +42,7 @@ router.post('/signup', async (req, res) => {
         });
 
         await newStudent.save();
+
         res.json({
             status: true,
             message: "Signup successful",
@@ -48,6 +53,7 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+// ✅ LOGIN ROUTE
 router.post('/login', async (req, res) => {
     try {
         const { Usertype, uniqid, password } = req.body;
@@ -58,12 +64,13 @@ router.post('/login', async (req, res) => {
         const isMatch = await student.comparePassword(password);
         if (!isMatch) throw new Error("Incorrect password");
 
-        // ✅ Match login Usertype with stored usertype
+        // ✅ Match Usertype
         if (student.Usertype !== Usertype) {
             throw new Error("Usertype mismatch");
         }
 
         const token = await student.generateToken();
+
         res.json({
             status: true,
             message: "Login successful",
