@@ -1,4 +1,7 @@
 ![WhatsApp Image 2025-04-19 at 7 37 07 AM (1)](https://github.com/user-attachments/assets/56190f8b-bea4-42eb-8cc8-1d102d7e79d1)# HostelKaidi - Backend
+![WhatsApp Image 2025-04-19 at 7 39 43 AM](https://github.com/user-attachments/assets/54006187-6431-480f-9792-84c927b6057d)
+![WhatsApp Image 2025-04-19 at 7 37 06 AM](https://github.com/user-attachments/assets/fab251bf-ca8f-4ca6-844d-eac5e6ce2d5d)
+
 
 🚀 **Project built during Hackathon @ VSSUT**
 
@@ -47,11 +50,7 @@ hostelkaidi-backend/
 └── package.json
 
 
-![WhatsApp Image 2025-04-19 at 7 37 07 AM (1)](https://github.com/user-attachments/assets/7949df87-28c3-4fbb-af2d-c744c42252d9)
-![WhatsApp Image 2025-04-19 at 7 37 07 AM (1)](https://github.com/user-attachments/assets/9464d008-6fa8-448e-ae62-a3c64480c65b)
-![WhatsApp Image 2025-04-19 at 7 39 43 AM](https://github.com/user-attachments/assets/54006187-6431-480f-9792-84c927b6057d)
-![WhatsApp Image 2025-04-19 at 7 37 06 AM](https://github.com/user-attachments/assets/fab251bf-ca8f-4ca6-844d-eac5e6ce2d5d)
-![WhatsApp Image 2025-04-19 at 7 37 06 AM](https://github.com/user-attachments/assets/cb4e972f-4f90-471d-b248-b9f2b7c76df4)
+
 
 
 
